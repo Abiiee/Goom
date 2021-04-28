@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { ClientEvents, Collection} from 'discord.js';
+import { ClientEvents, Collection} from 'discord.js-light';
 import Agness from '../bot';
 
 interface EventOptions {

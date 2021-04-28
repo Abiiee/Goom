@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Collection, Message, TextChannel, PermissionString } from 'discord.js';
-import { Server } from '../database/server';
+import { Collection, Message, TextChannel, PermissionString } from 'discord.js-light';
 import Agness from '../bot';
 
 const devs = process.env.DEVS ? process.env.DEVS.split(', ') : [];

@@ -1,5 +1,5 @@
   
-import { Message, MessageAttachment, TextChannel } from 'discord.js';
+import { Message, MessageAttachment, TextChannel } from 'discord.js-light';
 import { Servers } from '../../database/server';
 import Event from '../../structures/Event';
 import Agness from '../../bot';

@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/AviiiCD/Goom#readme",
   "dependencies": {
-    "discord.js": "github:discordjs/discord.js",
     "discord.js-light": "github:timotejroiko/discord.js-light",
     "dotenv": "^8.2.0",
     "mongoose": "^5.12.6"

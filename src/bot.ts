@@ -1,4 +1,4 @@
-import { Client } from 'discord.js';
+import { Client } from 'discord.js-light';
 import Commands from './managers/Commands';
 import Events from './managers/Events';
 import { connect } from 'mongoose';

@@ -1,6 +1,6 @@
 import Command from '../structures/Command';
 import { readdirSync, statSync } from 'fs';
-import { Collection } from 'discord.js';
+import { Collection } from 'discord.js-light';
 import { join } from 'path';
 import Agness from '../bot';
 
