@@ -1,0 +1,33 @@
+{
+  "name": "goom",
+  "version": "1.0.0",
+  "description": "Yet another moderation bot.",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "npm run build && node .",
+    "eslint": "eslint src/",
+    "eslint:fix": "eslint src/ --fix",
+    "build": "tsc"
+  },
+  "repository": {
+    "url": "git+https://github.com/AviiiCD/Goom"
+  },
+  "keywords": [],
+  "author": "AviiiCD",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AviiiCD/Goom/issues"
+  },
+  "homepage": "https://github.com/AviiiCD/Goom#readme",
+  "dependencies": {
+    "discord.js": "github:discordjs/discord.js",
+    "discord.js-light": "github:timotejroiko/discord.js-light",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.12.6"
+  },
+  "devDependencies": {
+    "@types/node": "^15.0.1",
+    "eslint": "^7.25.0",
+    "typescript": "^4.2.4"
+  }
+}

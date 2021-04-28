@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "commonjs",
+      "lib": [
+        "esnext",
+        "esnext.asynciterable"
+      ],
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "strict": true,
+      "alwaysStrict": true,
+      "skipLibCheck": true,
+      "noImplicitAny": true,
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "forceConsistentCasingInFileNames": true
+    },
+    "exclude": [
+      "node_modules",
+      "dist"
+    ],
+  }
