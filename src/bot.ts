@@ -13,7 +13,12 @@ export default class Goom extends Client {
     constructor() {
         super({
             partials: ['MESSAGE', 'REACTION', 'CHANNEL', 'GUILD_MEMBER', 'USER'],
-            intents: 5635
+            intents: 5635,
+            cacheOverwrites: true,
+            cacheChannels: true,
+            cacheGuilds: true,
+            cacheMembers: true,
+            cacheRoles: true,
         });
 
         connect(process.env.MONGO_URL as string, {

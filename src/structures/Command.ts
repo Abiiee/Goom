@@ -72,9 +72,9 @@ export default abstract class Command {
     // eslint-disable-next-line no-unused-vars
     abstract run(message: Message, args: string[]): Promise<Message | void>;
 
-    canRun(message: Message): boolean {
+    async canRun(message: Message): Promise<boolean> {
         const channel = (message.channel as TextChannel);
-        if (message.guild && !channel.permissionsFor(message.guild!.me!)!.has('SEND_MESSAGES')) return false;
+        if (message.guild && !channel.permissionsFor(message.guild!.me!).has('SEND_MESSAGES')) return false;
         if (!this.enabled && !devs.includes(message.author.id))
             return !this.sendOrReply(message, 'This command is under maintenance.');
         if (this.checkCooldowns(message) && !devs.includes(message.author.id))
