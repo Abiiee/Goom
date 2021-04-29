@@ -2,11 +2,15 @@ import Command from '../../structures/Command';
 import { Message, Util } from 'discord.js';
 import Agness from '../../bot';
 import { Settings } from '../../database/settings';
+import { Automods } from '../../database/automod';
 
 export default class SetupCommand extends Command {
     constructor(client: Agness, category: string) {
         super(client, {
             name: 'setup',
+            aliases: ['stp', 'config'],
+            botGuildPermissions: ['MANAGE_CHANNELS', 'MANAGE_GUILD'],
+            memberGuildPermissions: ['MANAGE_GUILD'],
             category
         });
     }
@@ -61,7 +65,9 @@ export default class SetupCommand extends Command {
                     if (!model) model = new Settings({ guildID: message.guild!.id, muteRoleID: role.id })
                     model.muteRoleID = role.id
                     await model.save()
-                    message.channel.send(`Finish editing the role **${role}**`, {
+                    message.channel.send(`Finish editing the role **${role}**
+                    
+||If an error occurs in any channel, check my permissions.||`, {
                         allowedMentions: {
                             roles: []
                         }
@@ -101,8 +107,42 @@ Remember that it can cause problems when executing the \`tempmute\` and \`mute\`
 
                 break;
             }
+            case 'automod': {
+                if (args[1]?.toLowerCase() !== 'reset') {
+                    const model = await Automods.findOne({ guildID: message.guild!.id })
+                    if (model) return message.channel.send(`There is already an active automod on the server, if you want to restore it to the default use:
+> \`${this.prefix}setup automod reset\``)
+                } else {
+                    await Automods.findOneAndDelete({ guildID: message.guild!.id })
+                }
+                await Automods.create({ guildID: message.guild!.id })
+                message.channel.send(`**AutoMod**
+> Message spam: \`5\` messages in \`2\` seconds (\`1 strike\`)
+> Anti invites: \`2\` strikes
+> Anti zalgo: \`0\` strikes (\`disabled\`)
+> Anti capital letters: \`10\` uppercase (\`1 strike\`)
+> Anti mass attachment: \`4\` attachments (\`1 strike\`)
+> Anti mass emojis: \`8\` emojis (\`1 strike\`)
+> Max Characters: \`250\` characters (\`1 strike\`)
+> AntiRaid: \`10\` joins in \`5\` seconds (\`ban\`)
+> Ignored Users: \`none\`
+> Ignored Roles: \`none\`
+
+**Punishments**
+> \`[2]\` 🤐 \`tempmute\` - 30m
+> \`[3]\` 🤐 \`tempmute\` - 12h
+> \`[4]\` 👢 \`kick\`
+> \`[6]\` 🔨 \`ban\``)
+                break;
+            }
+
             default: {
-                return message.channel.send('Pon algo valido')
+                return message.channel.send(`You must specify what you want to set, these are the options:
+> \`${this.prefix}setup muterole <@Role | ID>\`
+> \`${this.prefix}setup modrole <@Role | ID>\`
+> \`${this.prefix}setup automod\`
+
+||The places between "<>" do not need to be specified.||`)
             }
         }
     }
