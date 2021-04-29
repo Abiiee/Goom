@@ -24,7 +24,6 @@ export default class MessageEvent extends Event {
         if (!usedPrefix) return;
         if (usedPrefix != prefix)
             message.mentions.users.delete(message.mentions.users.first()!.id);
-
         const args = message.content.slice(usedPrefix.length).trim().split(/ +/g);
         const command = args.shift()?.toLowerCase();
 

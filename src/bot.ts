@@ -19,6 +19,8 @@ export default class Goom extends Client {
             cacheGuilds: true,
             cacheMembers: true,
             cacheRoles: true,
+            cacheEmojis: false,
+            messageCacheMaxSize: 1
         });
 
         connect(process.env.MONGO_URL as string, {
