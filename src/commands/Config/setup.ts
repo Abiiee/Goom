@@ -118,21 +118,23 @@ Remember that it can cause problems when executing the \`tempmute\` and \`mute\`
                 await Automods.create({ guildID: message.guild!.id })
                 message.channel.send(`**AutoMod**
 > Message spam: \`5\` messages in \`2\` seconds (\`1 strike\`)
+> Anti duplicate: \`1 strike\`
 > Anti invites: \`2\` strikes
 > Anti zalgo: \`0\` strikes (\`disabled\`)
-> Anti capital letters: \`10\` uppercase (\`1 strike\`)
-> Anti mass attachment: \`4\` attachments (\`1 strike\`)
-> Anti mass emojis: \`8\` emojis (\`1 strike\`)
+> Max capital letters: \`10\` uppercase (\`1 strike\`)
+> Max attachment: \`4\` attachments (\`1 strike\`)
+> Max emojis: \`8\` emojis (\`1 strike\`)
+> Max spoiler: \`0\` strikes (\`disabled\`)
 > Max Characters: \`250\` characters (\`1 strike\`)
 > AntiRaid: \`10\` joins in \`5\` seconds (\`ban\`)
 > Ignored Users: \`none\`
 > Ignored Roles: \`none\`
 
-**Punishments**
-> \`[2]\` 🤐 \`tempmute\` - 30m
-> \`[3]\` 🤐 \`tempmute\` - 12h
-> \`[4]\` 👢 \`kick\`
-> \`[6]\` 🔨 \`ban\``)
+**Punishments** ||🚩 refer to strikes.||
+> \`🚩[2]\` 🤐 \`tempmute\` - 30m
+> \`🚩[3]\` 🤐 \`tempmute\` - 12h
+> \`🚩[4]\` 👢 \`kick\`
+> \`🚩[6]\` 🔨 \`ban\``)
                 break;
             }
 

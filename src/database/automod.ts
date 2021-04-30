@@ -24,7 +24,6 @@ export interface MessageSpam extends Document {
 }
 
 export interface BaseAutoModMass extends Document {
-    enabled: boolean;
     amount: number;
     cases: number;
 }
@@ -35,6 +34,7 @@ export interface AutoMod extends Document {
     antiInvites: AntiInvites;
     antiZalgo: Number;
     messageSpam: MessageSpam;
+    antiDuplicateMessage: number;
     antiMassCaps: BaseAutoModMass;
     antiMassSpoilers: BaseAutoModMass;
     antiMassAttachments: BaseAutoModMass;
@@ -51,39 +51,27 @@ const automod: Schema<AutoMod> = new Schema({
         required: true,
         unique: true
     },
-    modRoleID: {
-        type: String,
-        default: ''
-    },
-    muteRoleID: {
-        type: String,
-        default: ''
-    },
-    modLogs: {
-        type: String,
-        default: ''
-    },
     punishments: {
         type: [Object],
         default: [
             {
-                type: 'tempmute',
+                TYPE: 'tempmute',
                 cases: 2,
                 time: 30 * 60000
             },
             {
-                type: 'tempmute',
-                case: 3,
+                TYPE: 'tempmute',
+                cases: 3,
                 time: 12 * 60 * 60000
             },
             {
-                type: 'kick',
-                case: 4,
+                TYPE: 'kick',
+                cases: 4,
                 time: 0
             },
             {
-                type: 'ban',
-                case: 6,
+                TYPE: 'ban',
+                cases: 6,
                 time: 0
             }
         ]
@@ -91,7 +79,6 @@ const automod: Schema<AutoMod> = new Schema({
     antiInvites: {
         type: Object,
         default: {
-            enabled: true,
             cases: 2
         }
     },
@@ -107,10 +94,13 @@ const automod: Schema<AutoMod> = new Schema({
             cases: 1
         }
     },
+    antiDuplicateMessage: {
+        type: Number,
+        default: 1
+    },
     antiMassCaps: {
         type: Object,
         default: {
-            enabled: true,
             amount: 10,
             cases: 1
         }
@@ -118,15 +108,13 @@ const automod: Schema<AutoMod> = new Schema({
     antiMassSpoilers: {
         type: Object,
         default: {
-            enabled: true,
-            amount: 5,
-            cases: 1
+            amount: 0,
+            cases: 0
         }
     },
-    antiMassAttachmets: {
+    antiMassAttachments: {
         type: Object,
         default: {
-            enabled: true,
             amount: 4,
             cases: 1
         }
@@ -134,7 +122,6 @@ const automod: Schema<AutoMod> = new Schema({
     antiMassEmojis: {
         type: Object,
         default: {
-            enabled: true,
             amount: 8,
             cases: 1
         }
@@ -142,7 +129,6 @@ const automod: Schema<AutoMod> = new Schema({
     antiMaxCharacters: {
         type: Object,
         default: {
-            enabled: true,
             amount: 250,
             cases: 1
         }
