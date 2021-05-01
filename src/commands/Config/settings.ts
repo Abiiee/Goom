@@ -14,7 +14,7 @@ export default class SettingsCommand extends Command {
     }
 
     async run(message: Message): Promise<Message> {
-        const settings = await Settings.findOne({ guildID: message.guild!.id})
+        const settings = await Settings.findOne({ guildID: message.guild!.id })
         const automod = await Automods.findOne({ guildID: message.guild!.id })
 
         return message.channel.send(`> **Settings of ${message.guild!.name} server**`, new MessageEmbed()
@@ -23,7 +23,9 @@ export default class SettingsCommand extends Command {
 **Mute role:** ${settings?.muteRoleID ? `<@&${settings!.muteRoleID}>` : '`none`'}
 **Mod logs:** ${settings?.modLogs ? `<#${settings!.modLogs}>` : '`none`'}`, true)
             .addField('🚩 Punishments', `${automod?.punishments.length ? automod.punishments.sort((a, b) => a.cases - b.cases).map((item) => {
-                const emojis = {
+                const emojis: {
+                    [x: string]: string
+                } = {
                     mute: '🤐',
                     tempmute: '🤐',
                     kick: '👢',
@@ -48,7 +50,7 @@ Max Characters:  ${(automod?.antiMaxCharacters?.amount && automod?.antiMaxCharac
 __Others__
 
 Anti raid: ${(automod?.antiRaid?.joins && automod?.antiRaid?.seconds) ? `\`${automod?.antiRaid?.joins}\`joins/\`${automod?.antiRaid?.seconds}\`s` : '`disabled`'}
-Ignore users ${automod?.usersIgnored.length ? automod?.usersIgnored.map(x => `<@${x}>`).join(', ') : '`disabled`'}
-Ignore roles ${automod?.rolesIgnored.length ? automod?.rolesIgnored.map(x => `<@&${x}>`).join(', ') : '`disabled`'}`, true))
+Ignore users ${automod?.usersIgnored.length ? automod.usersIgnored.map(x => `<@${x}>`).join(', ') : '`none`'}
+Ignore roles ${automod?.rolesIgnored.length ? automod.rolesIgnored.filter(roleID => !!message.guild?.roles.cache.has(roleID)).map(x => `<@&${x}>`).join(', ') : '`none`'}`, true))
     }
 }
