@@ -7,7 +7,6 @@ export interface Punishments {
 }
 
 export interface AntiInvites extends Document {
-    enabled: boolean;
     whiteList: string[];
     cases: number;
 }
@@ -79,6 +78,7 @@ const automod: Schema<AutoMod> = new Schema({
     antiInvites: {
         type: Object,
         default: {
+            whiteList: [],
             cases: 2
         }
     },

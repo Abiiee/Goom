@@ -1,9 +1,9 @@
-import Command from '../../structures/Command';
 import { Message, MessageEmbed } from 'discord.js';
-import Agness from '../../bot';
 import { Settings } from '../../database/settings';
 import { Automods } from '../../database/automod';
+import Command from '../../structures/Command';
 import ms = require('@fabricio-191/ms')
+import Agness from '../../bot';
 
 export default class SettingsCommand extends Command {
     constructor(client: Agness, category: string) {
